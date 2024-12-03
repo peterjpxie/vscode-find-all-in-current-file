@@ -11,7 +11,7 @@ Install this extension from [marketplace](https://marketplace.visualstudio.com/i
 
 Open VS code command palette (Ctrl+Shift+P) and type or select 'Find in Current File'.
 
-It will search the selected text in the current file displayed in the active editor.
+It will search the selected text (or enter later if no selected text) in the current file displayed in the active editor. 
 
 What it does is just to get the filename in the active editor, open the Search panel, and automatically enter the filename into "files to include" field.
 
