@@ -1,4 +1,7 @@
 # Change Log
+## v0.0.9
+- Support files added to workspace by [SSH FS](https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs).
+- Remove yarn and add bun
 
 ## v0.0.8
 - Auto set default shortcut ctrl+alt+c during installation
