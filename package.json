@@ -2,7 +2,7 @@
     "name": "find-in-current-file",
     "displayName": "Find in Current File",
     "description": "Search only in the current file",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "license": "MIT",
     "publisher": "peterjpxie",
     "engines": {
@@ -39,11 +39,10 @@
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
+        "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
-        "lint": "eslint src --ext ts",
-        "pretest": "yarn run compile && yarn run lint",
-        "test": "node ./out/test/runTest.js"
+        "pretest": "bun run compile",
+        "test": "bun run ./out/test/runTest.js"
     },
     "devDependencies": {
         "@types/glob": "^7.1.1",

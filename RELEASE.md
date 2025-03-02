@@ -1,26 +1,21 @@
-* Install [nodejs](https://nodejs.org/en/download/package-manager/), and `nvm` is recommended.
-* Install yarn
+* Install bun
 ```
-npm install -g yarn
+curl -fsSL https://bun.sh/install | bash
 ```
+* Install [nodejs and npm](https://nodejs.org/en/download/package-manager/).
 * Install vsce
 ```
-npm install -g vsce
+bun install -g vsce
 vsce -h # check
 ```
 * Install typescript
 ```
-npm install -g typescript
+bun install -g typescript
 tsc -h
-```
-* Install eslint
-```
-npm install --global eslint
-eslint -h
 ```
 * Install local dependencies
 ```
-yarn install
+bun install
 ```
 * Go into the folder of this repo, e.g. `cd vscode-find-in-current-file`
 * Edit `version` in package.json, e.g. increase minor version by 1.
@@ -28,7 +23,7 @@ yarn install
 * Build extension release package with `vsce package`
 * Install the extension locally with `code --install-extension find-in-current-file-x.y.z.vsix --force` and validate the extension is working as expected.
 * [Optional] Release the version in github with tags `git commit && git tag vx.y.z && git push && git push --tags`
-* Release the extension to vscode marketplace with `vsce publish --yarn`. You will be prompted for the marketplace token. Or you can publish directly with `vsce publish --yarn -p <token>`.
+* Release the extension to vscode marketplace with `vsce publish`. You will be prompted for the marketplace token. Or you can publish directly with `vsce publish -p <token>`.
 
 Alternatively you can publish the extension via the marketplace web portal.
 * Login https://marketplace.visualstudio.com/vscode
