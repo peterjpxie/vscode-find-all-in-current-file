@@ -13,6 +13,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate() {}
 
+
+
 async function searchInCurrentFile(): Promise<void> {
   const activeEditor = vscode.window.activeTextEditor;
   if (!activeEditor) {
