@@ -25,7 +25,7 @@ bun install
 * Build extension release package with `vsce package`
 * Install the extension locally with `code --install-extension find-in-current-file-x.y.z.vsix --force` and validate the extension is working as expected.
 * Release the extension to vscode marketplace with `vsce publish`. You will be prompted for the marketplace token. Or you can publish directly with `vsce publish -p <azure personal access token>`.
-    Get the personal access token from https://dev.azure.com/<orgnization>/, i.e., https://dev.azure.com/peterjpxie/ in my case.
+    Get the personal access token from `https://dev.azure.com/<orgnization>/`, i.e., `https://dev.azure.com/peterjpxie/` in my case.
 
 Alternatively you can publish the extension via the marketplace web portal (sometimes does not work).
 * Login https://marketplace.visualstudio.com/vscode
