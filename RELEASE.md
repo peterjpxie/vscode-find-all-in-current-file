@@ -1,3 +1,5 @@
+* Checkout the code on a machine with a desktop
+    The `vsce publish` command seems to require a desktop environment.
 * Install bun
 ```
 curl -fsSL https://bun.sh/install | bash
@@ -22,10 +24,10 @@ bun install
 * Edit CHANGELOG.md
 * Build extension release package with `vsce package`
 * Install the extension locally with `code --install-extension find-in-current-file-x.y.z.vsix --force` and validate the extension is working as expected.
-* [Optional] Release the version in github with tags `git commit && git tag vx.y.z && git push && git push --tags`
-* Release the extension to vscode marketplace with `vsce publish`. You will be prompted for the marketplace token. Or you can publish directly with `vsce publish -p <token>`.
+* Release the extension to vscode marketplace with `vsce publish`. You will be prompted for the marketplace token. Or you can publish directly with `vsce publish -p <azure personal access token>`.
+    Get the personal access token from https://dev.azure.com/<orgnization>/, i.e., https://dev.azure.com/peterjpxie/ in my case.
 
-Alternatively you can publish the extension via the marketplace web portal.
+Alternatively you can publish the extension via the marketplace web portal (sometimes does not work).
 * Login https://marketplace.visualstudio.com/vscode
 * Click 'Publish extensions' 
 * Click 'New extension'/'vs code' and upload the `find-in-current-file-x.y.z.vsix` file built by vsce.
