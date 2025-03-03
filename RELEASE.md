@@ -1,8 +1,12 @@
 * Checkout the code on a machine with a desktop
     The `vsce publish` command seems to require a desktop environment.
-* Install bun
+* Install [bun](https://bun.sh/docs/installation)
 ```
+# Linux
 curl -fsSL https://bun.sh/install | bash
+
+# Windows
+powershell -c "irm bun.sh/install.ps1|iex"
 ```
 * Install [nodejs and npm](https://nodejs.org/en/download/package-manager/).
 * Install vsce
