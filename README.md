@@ -4,7 +4,7 @@ A fork of https://github.com/shibayu36/vscode-search-in-current-file with bug fi
 
 This is a Visual Studio Code extension that makes it easy to find all in the current active editor.
 
-![Demo](images/demo.gif)
+![images/demo.gif](https://raw.githubusercontent.com/peterjpxie/vscode-find-all-in-current-file/refs/heads/main/images/demo.gif)
 
 ## How to Use
 Install this extension from [marketplace](https://marketplace.visualstudio.com/items?itemName=peterjpxie.find-in-current-file) or build and install by source code.
