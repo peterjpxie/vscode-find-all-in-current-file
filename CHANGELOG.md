@@ -1,4 +1,7 @@
 # Change Log
+## v0.0.10
+- Change demo.gif to use full link in readme.md so it can display in vs code marketplace description.
+
 ## v0.0.9
 - Support files added to workspace by [SSH FS](https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs).
 - Remove yarn and add bun

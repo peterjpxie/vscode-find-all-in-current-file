@@ -1,5 +1,5 @@
 * Checkout the code on a machine with a desktop
-    The `vsce publish` command seems to require a desktop environment.
+    The `vsce publish` command seems to require a desktop environment. But WSL is okay.
 * Install [bun](https://bun.sh/docs/installation)
 ```
 # Linux
@@ -9,6 +9,7 @@ curl -fsSL https://bun.sh/install | bash
 powershell -c "irm bun.sh/install.ps1|iex"
 ```
 * Install [nodejs and npm](https://nodejs.org/en/download/package-manager/).
+    nodejs is still required for vsce to work even bun is used.
 * Install vsce
 ```
 bun install -g vsce
