@@ -2,7 +2,7 @@
     "name": "find-in-current-file",
     "displayName": "Find in Current File",
     "description": "Search only in the current file",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "license": "MIT",
     "publisher": "peterjpxie",
     "engines": {
@@ -18,7 +18,8 @@
     ],
     "icon": "images/icon.png",
     "activationEvents": [
-        "onCommand:find-in-current-file.searchInCurrentFile"
+        "onCommand:find-in-current-file.searchInCurrentFile",
+        "onCommand:find-in-current-file.replaceInCurrentFile"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -26,6 +27,10 @@
             {
                 "command": "find-in-current-file.searchInCurrentFile",
                 "title": "Find in Current File"
+            },
+            {
+                "command": "find-in-current-file.replaceInCurrentFile",
+                "title": "Replace in Current File"
             }
         ],
         "keybindings": [
@@ -33,6 +38,12 @@
                 "command": "find-in-current-file.searchInCurrentFile",
                 "key": "ctrl+alt+c",
                 "mac": "cmd+alt+c",
+                "when": "editorFocus || editorIsOpen"
+            },
+            {
+                "command": "find-in-current-file.replaceInCurrentFile",
+                "key": "ctrl+alt+h",
+                "mac": "cmd+alt+h",
                 "when": "editorFocus || editorIsOpen"
             }
         ]

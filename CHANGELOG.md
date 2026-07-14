@@ -1,4 +1,7 @@
 # Change Log
+## v0.0.11
+- Add `replaceInCurrentFile` command
+
 ## v0.0.10
 - Change demo.gif to use full link in readme.md so it can display in vs code marketplace description.
 

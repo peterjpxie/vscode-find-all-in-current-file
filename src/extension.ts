@@ -1,14 +1,24 @@
 import * as vscode from "vscode";
 
 export function activate(context: vscode.ExtensionContext) {
-  let disposable = vscode.commands.registerCommand(
+  let findDisposable = vscode.commands.registerCommand(
     "find-in-current-file.searchInCurrentFile",
     async () => {
       await searchInCurrentFile();
     }
   );
 
-  context.subscriptions.push(disposable);
+  context.subscriptions.push(findDisposable);
+
+  // Register the replace in current file command
+  let replaceDisposable = vscode.commands.registerCommand(
+    "find-in-current-file.replaceInCurrentFile",
+    async () => {
+      await replaceInCurrentFile();
+    }
+  );
+
+  context.subscriptions.push(replaceDisposable);
 }
 
 export function deactivate() {}
@@ -20,12 +30,12 @@ function remove_SSHFS_prefix(str: string): string {
   const prefix = "SSH FS - ";
   // Check if the string starts with the prefix
   if (str.startsWith(prefix)) {
-      // Find the position of the first slash character after the prefix
-      const firstSlashIndex = str.indexOf("/", prefix.length - 1);
-      // If a slash is found, return the substring starting after that slash
-      if (firstSlashIndex !== -1) {
-          return str.substring(firstSlashIndex + 1);
-      }
+    // Find the position of the first slash character after the prefix
+    const firstSlashIndex = str.indexOf("/", prefix.length - 1);
+    // If a slash is found, return the substring starting after that slash
+    if (firstSlashIndex !== -1) {
+      return str.substring(firstSlashIndex + 1);
+    }
   }
   // Return the original string if the prefix is not found or no slash is found
   return str;
@@ -57,4 +67,33 @@ async function searchInCurrentFile(): Promise<void> {
     query: activeEditor.document.getText(activeEditor.selection),
     filesToInclude: currentFilePath,
   });
+}
+
+
+async function replaceInCurrentFile(): Promise<void> {
+  const activeEditor = vscode.window.activeTextEditor;
+  if (!activeEditor) {
+    return;
+  }
+
+  var currentFilePath = vscode.workspace.asRelativePath(
+    activeEditor.document.uri
+  );
+
+  if (currentFilePath.includes(":")) {
+    const path = require('path');
+    currentFilePath = path.basename(currentFilePath);
+  }
+
+  currentFilePath = remove_SSHFS_prefix(currentFilePath);
+
+  // 'replaceInFiles' ignores arguments. So trigger 'findInFiles' first
+  await vscode.commands.executeCommand("workbench.action.findInFiles", {
+    query: activeEditor.document.getText(activeEditor.selection),
+    filesToInclude: currentFilePath,
+  });
+
+  // This opens the replacement input fields without resetting the configuration
+  // from the last step.
+  await vscode.commands.executeCommand("workbench.action.replaceInFiles");
 }
