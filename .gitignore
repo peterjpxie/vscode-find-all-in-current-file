@@ -3,6 +3,17 @@ a.*
 .azure_pat.txt
 
 out
-node_modules
+node_modules/
 .vscode-test/
 *.vsix
+
+# logs
+*.log*
+
+# misc
+.DS_Store
+*.local
+
+# editor directories
+.idea/
+.vscode/
