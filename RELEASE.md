@@ -35,6 +35,7 @@ bun install
 Alternatively you can publish the extension via the marketplace web portal (sometimes does not work).
 * Login https://marketplace.visualstudio.com/vscode
 * Click 'Publish extensions' 
-* Click 'New extension'/'vs code' and upload the `find-in-current-file-x.y.z.vsix` file built by vsce.
+* Find this extension 'Find in Current File' in the list
+* Click the three-dot icon of it and select Update, then upload the `find-in-current-file-x.y.z.vsix` file built by vsce.
 * It takes a few minutes to approve.
 * Then search the extension in the marketplace by the full name with double quote, e.g. "find in current file", to confirm.
