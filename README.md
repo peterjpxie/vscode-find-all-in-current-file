@@ -9,9 +9,10 @@ This is a Visual Studio Code extension that makes it easy to find all in the cur
 ## How to Use
 Install this extension from [marketplace](https://marketplace.visualstudio.com/items?itemName=peterjpxie.find-in-current-file) or build and install by source code.
 
-Open VS code command palette (Ctrl+Shift+P) and type or select 'Find in Current File'.
-
-It will search the selected text (or enter later if no selected text) in the current file displayed in the active editor. 
+1. Open VS code command palette (Ctrl+Shift+P) and type or select 'Find in Current File'.<br>
+   It will search the selected text (or enter later if no selected text) in the current file displayed in the active editor.
+2. Open VS code command palette (Ctrl+Shift+P) and type or select 'Replace in Current File'.<br>
+   This is like 'Find in Current File' except that it will expand the replace input.
 
 What it does is just to get the filename in the active editor, open the Search panel, and automatically enter the filename into "files to include" field.
 
@@ -22,6 +23,12 @@ What it does is just to get the filename in the active editor, open the Search p
   "key": "ctrl+alt+c",
   "mac": "cmd+alt+c",
   "command": "find-in-current-file.searchInCurrentFile",
+  "when": "editorFocus || editorIsOpen"
+},
+{
+  "command": "find-in-current-file.replaceInCurrentFile",
+  "key": "ctrl+alt+h",
+  "mac": "cmd+alt+h",
   "when": "editorFocus || editorIsOpen"
 }
 ```
