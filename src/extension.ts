@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import * as path from "path";
 
 export function activate(context: vscode.ExtensionContext) {
   let findDisposable = vscode.commands.registerCommand(
@@ -41,59 +42,63 @@ function remove_SSHFS_prefix(str: string): string {
   return str;
 }
 
-
-async function searchInCurrentFile(): Promise<void> {
+/**
+ * Resolve the current file's path (relative to workspace) suitable for
+ * use with "files to include" in the find/replace panel.
+ *
+ * Returns undefined when there is no active editor.
+ */
+function getCurrentFileFilter(): string | undefined {
   const activeEditor = vscode.window.activeTextEditor;
   if (!activeEditor) {
-    return;
+    return undefined;
   }
 
-  var currentFilePath = vscode.workspace.asRelativePath(
+  let currentFilePath = vscode.workspace.asRelativePath(
     activeEditor.document.uri
   );
-  
+
   // Workaround for issue #9
-  // Take only basename if it is a Windows full path with colon (:), e.g. D:\a\b.txt -> b.txt 
+  // Take only basename if it is a Windows full path with colon (:), e.g. D:\a\b.txt -> b.txt
   if (currentFilePath.includes(":")) {
-    const path = require('path');
     currentFilePath = path.basename(currentFilePath);
   }
 
   // Support files added to workspace by SSH FS
   currentFilePath = remove_SSHFS_prefix(currentFilePath);
 
-  await vscode.commands.executeCommand("workbench.action.findInFiles", {
-    // Fill-in selected text to query
-    query: activeEditor.document.getText(activeEditor.selection),
-    filesToInclude: currentFilePath,
-  });
+  return currentFilePath;
 }
 
-
-async function replaceInCurrentFile(): Promise<void> {
-  const activeEditor = vscode.window.activeTextEditor;
-  if (!activeEditor) {
+/**
+ * Common logic: open the Find in Files panel pre-filled for the current file.
+ * When openReplace is true, we additionally trigger the replace UI afterwards.
+ */
+async function openFindInCurrentFile(openReplace: boolean): Promise<void> {
+  const filesToInclude = getCurrentFileFilter();
+  if (!filesToInclude) {
     return;
   }
+  // we are sure activeTextEditor is not-null here, so we add ! mark here.
+  const activeEditor = vscode.window.activeTextEditor!;
+  const query = activeEditor.document.getText(activeEditor.selection);
 
-  var currentFilePath = vscode.workspace.asRelativePath(
-    activeEditor.document.uri
-  );
-
-  if (currentFilePath.includes(":")) {
-    const path = require('path');
-    currentFilePath = path.basename(currentFilePath);
-  }
-
-  currentFilePath = remove_SSHFS_prefix(currentFilePath);
-
-  // 'replaceInFiles' ignores arguments. So trigger 'findInFiles' first
   await vscode.commands.executeCommand("workbench.action.findInFiles", {
-    query: activeEditor.document.getText(activeEditor.selection),
-    filesToInclude: currentFilePath,
+    query,
+    filesToInclude,
   });
 
-  // This opens the replacement input fields without resetting the configuration
-  // from the last step.
-  await vscode.commands.executeCommand("workbench.action.replaceInFiles");
+  if (openReplace) {
+    // This opens the replacement input fields without resetting the configuration
+    // from the last step.
+    await vscode.commands.executeCommand("workbench.action.replaceInFiles");
+  }
+}
+
+async function searchInCurrentFile(): Promise<void> {
+  await openFindInCurrentFile(false);
+}
+
+async function replaceInCurrentFile(): Promise<void> {
+  await openFindInCurrentFile(true);
 }
