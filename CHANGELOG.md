@@ -1,4 +1,8 @@
 # Change Log
+## v0.0.12
+- Fixed https://github.com/shibayu36/vscode-search-in-current-file/issues/9 properly.
+- Fixed tsconfig.json issue.
+
 ## v0.0.11
 - Add `replaceInCurrentFile` command
 
