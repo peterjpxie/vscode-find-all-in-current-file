@@ -58,12 +58,6 @@ function getCurrentFileFilter(): string | undefined {
     activeEditor.document.uri
   );
 
-  // Workaround for issue #9
-  // Take only basename if it is a Windows full path with colon (:), e.g. D:\a\b.txt -> b.txt
-  if (currentFilePath.includes(":")) {
-    currentFilePath = path.basename(currentFilePath);
-  }
-
   // Support files added to workspace by SSH FS
   currentFilePath = remove_SSHFS_prefix(currentFilePath);
 
@@ -83,9 +77,14 @@ async function openFindInCurrentFile(openReplace: boolean): Promise<void> {
   const activeEditor = vscode.window.activeTextEditor!;
   const query = activeEditor.document.getText(activeEditor.selection);
 
+  // 'onlyOpenEditors: true' makes the following scenarios working:
+  // - After opening a folder workspace, add a file directly outside the folder and search on it. 
+  //  The file filter shows full path, e.g. /home/peter/a.txt or D:/a/a.txt.
+  //  Otherwise, it also has a side effect that the search never completes and you cannot stop it. 
   await vscode.commands.executeCommand("workbench.action.findInFiles", {
     query,
     filesToInclude,
+    onlyOpenEditors: true,
   });
 
   if (openReplace) {
